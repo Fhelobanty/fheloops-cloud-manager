@@ -2,6 +2,7 @@ package com.fhelocode.employeeapi.controller;
 
 import com.fhelocode.employeeapi.entity.CloudResource;
 import com.fhelocode.employeeapi.service.CloudResourceService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class CloudResourceController {
     }
 
     @PostMapping
-    public CloudResource createResource(@RequestBody CloudResource resource) {
+    public CloudResource createResource(@Valid @RequestBody CloudResource resource) {
         return cloudResourceService.createResource(resource);
     }
 

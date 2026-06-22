@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 @Entity
 public class CloudResource {
 
@@ -12,21 +15,29 @@ public class CloudResource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String resourceName;
+    @NotBlank(message = "Resource name is required")
+private String resourceName;
 
-    private String resourceType;
+@NotBlank(message = "Resource type is required")
+private String resourceType;
 
-    private String cloudProvider;
+@NotBlank(message = "Cloud provider is required")
+private String cloudProvider;
 
-    private String region;
+@NotBlank(message = "Region is required")
+private String region;
 
-    private String environment;
+@NotBlank(message = "Environment is required")
+private String environment;
 
-    private String status;
+@NotBlank(message = "Status is required")
+private String status;
 
-    private Double monthlyCost;
+@Positive(message = "Monthly cost must be greater than zero")
+private Double monthlyCost;
 
-    private String owner;
+@NotBlank(message = "Owner is required")
+private String owner;
 
     public CloudResource() {
     }
