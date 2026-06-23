@@ -31,6 +31,23 @@ pipeline {
         }
 
         stage('Login to ECR') {
+    steps {
+        sh '''
+            whoami
+            echo HOME=$HOME
+
+            ls -la $HOME
+            ls -la $HOME/.aws || true
+
+            cat $HOME/.aws/config || true
+            cat $HOME/.aws/credentials || true
+
+            aws configure list || true
+
+            aws sts get-caller-identity --no-cli-pager || true
+        '''
+    }
+}
             steps {
                 sh '''
                 aws ecr get-login-password \
