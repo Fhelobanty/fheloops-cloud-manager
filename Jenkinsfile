@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stage('Login to ECR') {
+stage('Login to ECR') {
     steps {
         sh '''
             whoami
@@ -45,19 +45,15 @@ pipeline {
             aws configure list || true
 
             aws sts get-caller-identity --no-cli-pager || true
+
+            aws ecr get-login-password \
+            --region ${AWS_REGION} \
+            --no-cli-pager | docker login \
+            --username AWS \
+            --password-stdin 095279701594.dkr.ecr.us-east-1.amazonaws.com
         '''
     }
 }
-            steps {
-                sh '''
-                aws ecr get-login-password \
-                --region ${AWS_REGION} \
-                --no-cli-pager | docker login \
-                --username AWS \
-                --password-stdin ${ECR_REPO}
-                '''
-            }
-        }
 
         stage('Tag Image') {
             steps {
